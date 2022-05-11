@@ -6,7 +6,7 @@ use App\Models\Article;
 use Elasticsearch\Client;
 use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Collection;
-use App\Interfaces\SearchRepository;
+use App\Contracts\SearchRepository;
 
 class ElasticsearchRepository implements SearchRepository
 {

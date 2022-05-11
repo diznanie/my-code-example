@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Services\ElasticSearch;
 
-use App\Interfaces\QueryBuilder as QBInterface;
+use App\Contracts\QueryBuilder as QBInterface;
 
 class ElasticSearchQL
 {

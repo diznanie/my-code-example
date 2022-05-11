@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\ElasticSearch;
 
-use \App\Interfaces\QueryBuilder;
+use \App\Contracts\QueryBuilder;
 
 abstract class AbstractESBuilder implements QueryBuilder
 {
