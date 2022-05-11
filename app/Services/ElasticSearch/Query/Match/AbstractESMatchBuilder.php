@@ -2,19 +2,26 @@
 
 declare(strict_types=1);
 
-namespace App\Services\ElasticSearch;
+namespace App\Services\ElasticSearch\Query\Match;
 
 use \App\Contracts\QueryBuilder;
 
-abstract class AbstractESBuilder implements QueryBuilder
+abstract class AbstractESMatchBuilder implements QueryBuilder
 {
     public $field;
     protected $query;
 
+    public function __construct(
+        string $field,
+        string $query
+    ) {
+        $this->field = $field;
+    }
+
+
     public function build(): array
     {
         $queryName = $this->getQueryName();
-
         $query = [
             $queryName => [
                 $this->field => [

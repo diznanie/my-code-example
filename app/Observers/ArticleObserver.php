@@ -2,18 +2,12 @@
 
 namespace App\Observers;
 
+use App\Jobs\ReindexElasticsearchJob;
+use App\Jobs\RemoveIndexElasticsearchJob;
 use App\Models\Article;
-use Elastic\Elasticsearch\Client;
 
 class ArticleObserver
 {
-    private $elasticsearch;
-
-    public function __construct(Client $elasticsearch)
-    {
-        $this->elasticsearch = $elasticsearch;
-    }
-
     /**
      * Handle the Article "created" event.
      *
@@ -22,12 +16,7 @@ class ArticleObserver
      */
     public function created(Article $article)
     {
-        $this->elasticsearch->index([
-            'index' => $article->getSearchIndex(),
-            'type' => $article->getSearchType(),
-            'id' => $article->getKey(),
-            'body' => $article->toSearchArray(),
-        ]);
+        dispatch(new ReindexElasticsearchJob($article));
     }
 
     /**
@@ -38,11 +27,17 @@ class ArticleObserver
      */
     public function updated(Article $article)
     {
-        $this->elasticsearch->index([
-            'index' => $article->getSearchIndex(),
-            'type' => $article->getSearchType(),
-            'body' => $article->toSearchArray(),
-        ]);
+        dispatch(new ReindexElasticsearchJob($article));
+    }
+
+    /**
+     * Handle the Article "deleting" event.
+     *
+     * @param Article $article
+     * @return void
+     */
+    public function deleting(Article $article){
+        dispatch(new RemoveIndexElasticsearchJob($article));
     }
 
     /**
@@ -53,11 +48,7 @@ class ArticleObserver
      */
     public function deleted(Article $article)
     {
-        $this->elasticsearch->delete([
-            'index' => $article->getSearchIndex(),
-            'type' => $article->getSearchType(),
-            'id' => $article->getKey(),
-        ]);
+        //
     }
 
     /**
@@ -79,10 +70,6 @@ class ArticleObserver
      */
     public function forceDeleted(Article $article)
     {
-        $this->elasticsearch->delete([
-            'index' => $article->getSearchIndex(),
-            'type' => $article->getSearchType(),
-            'id' => $article->getKey(),
-        ]);
+        //
     }
 }

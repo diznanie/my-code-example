@@ -32,11 +32,14 @@ class ElasticsearchRepository implements SearchRepository
             'type' => $model->getSearchType(),
             'body' => [
                 'query' => [
-                    'multi_match' => [
-                        'fields' => ['title^5', 'body', 'tags'],
-                        'query' => $query,
-                    ],
+//                    'multi_match' => [
+//                        'fields' => ['title^5', 'body', 'tags'],
+//                        'query' => $query,
+//                    ],
+                    'match_all' => new \stdClass(),
+//
                 ],
+                'size' => 100,
             ],
         ]);
 
