@@ -4,15 +4,9 @@ declare(strict_types=1);
 namespace App\Services\ElasticSearch;
 
 use App\Interfaces\QueryBuilder as QBInterface;
-//use App\Services\ElasticSearch\Traits\HasAggregations;
-//use App\Services\ElasticSearch\Traits\HasCollapse;
-//use App\Services\ElasticSearch\Traits\HasSorting;
 
 class ElasticSearchQL
 {
-//    use HasCollapse;
-//    use HasSorting;
-//    use HasAggregations;
 
     private ?string $index = null;
 
@@ -84,9 +78,6 @@ class ElasticSearchQL
         if (null !== $this->postFilter) {
             $query['body']['post_filter'] = $this->postFilter->build();
         }
-
-        $this->buildSortTo($query['body'])
-            ->buildAggregationsTo($query['body']);
 
         return $query;
     }

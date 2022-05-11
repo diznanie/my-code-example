@@ -47,7 +47,7 @@ class ReindexCommand extends Command
         {
             $this->elasticsearch->index([
                 'index' => $article->getSearchIndex(),
-                'type' => '_doc',//$article->getSearchType(),
+                'type' => $article->getSearchType(),
                 'id' => $article->getKey(),
                 'body' => $article->toSearchArray(),
             ]);
