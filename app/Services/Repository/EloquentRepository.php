@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Services\Repository;
-use App\Interfaces\SearchRepository;
+use App\Contracts\SearchRepository;
 use App\Models\Article;
 use Illuminate\Database\Eloquent\Collection;
 

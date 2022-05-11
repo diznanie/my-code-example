@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Interfaces\SearchRepository;
+use App\Contracts\SearchRepository;
 use App\Services\Repository\ElasticsearchRepository;
 use App\Services\Repository\EloquentRepository;
 use Elasticsearch\Client;

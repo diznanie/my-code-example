@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\SearchRepository;
+use App\Contracts\SearchRepository;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
